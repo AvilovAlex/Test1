@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArduinoLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:ArduinoLibrary.Arduino">
+            <summary>
+            Класс, позволяющий взаимодействовать с платформой Arduino
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.ConnectInfoStruct">
+            <summary>
+            Тип свойств соединения
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.ConnectInfoStruct.comPort">
+            <summary>
+            Номер COM-порта в формате COM^\d
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.ConnectInfoStruct.baudRate">
+            <summary>
+            Скорость обмена данных
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.PinMode">
+            <summary>
+            Перечислимый тип режимов работы входов/выходов
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.PinMode.Off">
+            <summary>
+            Выход отключен
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.PinMode.DigitalInput">
+            <summary>
+            Дискретный вход
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.PinMode.DigitalOutput">
+            <summary>
+            Дискретный выход
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.PinMode.AnalogInput">
+            <summary>
+            Аналоговый вход
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.PinMode.AnalogOutput">
+            <summary>
+            Аналоговый выход
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.AnalogPinStateStruct">
+            <summary>
+            Тип состояния аналогового входа
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.AnalogPinStateStruct.pinValue">
+            <summary>
+            Состояние входа
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.AnalogPinStateStruct.pinMode">
+            <summary>
+            Режим входа/выхода
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.DigitalPinStateStruct">
+            <summary>
+            Тип состояния дискретного входа
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.DigitalPinStateStruct.pinValue">
+            <summary>
+            Состояние входа
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.DigitalPinStateStruct.pinMode">
+            <summary>
+            Режим входа/выхода
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.driver">
+            <summary>
+            Класс, обеспечивающий связь с микроконтроллером Arduino
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.threshold">
+            <summary>
+            Фильтрующая погрешность, на изменение которой не будут приходить события
+            </summary>
+        </member>
+        <member name="P:ArduinoLibrary.Arduino.Delta">
+            <summary>
+            Фильтрующая погрешность, на изменение которой не будут приходить события
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.AnalogPinChangeHandler">
+            <summary>
+            Делегат события изменения состояния аналогого входа
+            </summary>
+            <param name="sender">Экземпляр микрокотроллера, от которого пришло событие</param>
+            <param name="pin">Номер входа, изменившего своего состояния</param>
+            <param name="value">Новое состояние, пришеднее от входа</param>
+        </member>
+        <member name="E:ArduinoLibrary.Arduino.AnalogPinChanged">
+            <summary>
+            Событие изменения состояния аналогого входа
+            </summary>
+        </member>
+        <member name="T:ArduinoLibrary.Arduino.DigitalPinChangeHandler">
+            <summary>
+            Делегат события изменения состояния входа
+            </summary>
+            <param name="sender">Экземпляр микрокотроллера, от которого пришло событие</param>
+            <param name="pin">Номер входа, изменившего своего состояния</param>
+            <param name="value">Новое состояние, пришеднее от входа</param>
+        </member>
+        <member name="E:ArduinoLibrary.Arduino.DigitalPinChanged">
+            <summary>
+            Событие изменения состояния входа
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.analogPinState">
+            <summary>
+            Словарь, хранящий в себе состояния аналоговых входов микроконтроллера и обновляющийся по событиям от платы
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.digitalPinState">
+            <summary>
+            Словарь, хранящий в себе состояния дискретных входов микроконтроллера и обновляющийся по событиям от платы
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.pwmPinState">
+            <summary>
+            Словарь, хранящий в себе состояния PWM выходов микроконтроллера и обновляющийся по событиям от платы
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.portsState">
+            <summary>
+            Словарь байт-состояний двух портов
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.connectInfo">
+            <summary>
+            Свойства соединения
+            </summary>
+        </member>
+        <member name="F:ArduinoLibrary.Arduino.LogMode">
+            <summary>
+            Режим логирования
+            </summary>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.GetConnectionInfo(System.String)">
+            <summary>
+            Метод автоматического поиска платы Arduino, Подключенной к ПК
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.InitPinStates">
+            <summary>
+            Процедура, инициализирующая словарь состояний входов
+            </summary>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.UploadBoard(System.String,System.String)">
+            <summary>
+            Процедура загрузки скетча в микроконтроллер Arduino
+            </summary>
+            <param name="comPort"></param>
+            <param name="sketchPath"></param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.#ctor(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Конструктор класса с режимом автоматического поиска 
+            </summary>
+            <param name="comPort">COM-порт в формате COM\d</param>
+            <param name="delta">Погрешность измерения аналогого сигнала</param>
+            <param name="logMode">Вкл/Отк режима логировния аварийных сообщений</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.SetAnalogReportMode(System.Boolean)">
+            <summary>
+            Процедура активирующая отправку событий об изменении аналоговых входов
+            </summary>
+            <param name="enable">Включено/Выключено</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.SetDigitalReportMode(System.Boolean)">
+            <summary>
+            Процедура активирующая отправку событий об изменении аналоговых входов
+            </summary>
+            <param name="enable">Включено/Выключено</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.Driver_AnalogMessageReceieved(System.Int32,System.Int32)">
+            <summary>
+            Обработчик сообщений Firmata об изменении состояния аналоговых входов
+            </summary>
+            <param name="pin">Номер входа, изменившего своего состояния</param>
+            <param name="value">Новое состояние, пришеднее от входа</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.Driver_DigitalMessageReceieved(System.Int32,System.Int32)">
+            <summary>
+            Обработчик сообщений Firmata об изменении состояния дискретных входов
+            </summary>
+            <param name="portNumber">Номер порта, изменившего своего состояния</param>
+            <param name="portData">Новое состояние, пришеднее от порта</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.AnalogModePred(ArduinoLibrary.Arduino.PinMode)">
+            <summary>
+            Предикат аналогого режима записи или чтения
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.PwmPred(System.Int32)">
+            <summary>
+            Предикат, проверяющий, поддерживает ли выход PWM
+            </summary>
+            <param name="pin">Номер выхода</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.SetPinMode(System.Int32,ArduinoLibrary.Arduino.PinMode)">
+            <summary>
+            Процедура задания режима входа/выхода
+            </summary>
+            <param name="pinNumber">Номер входа/выхода (1..13)</param>
+            <param name="pinMode">Режим входа/выхода</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.SrtPinMode(System.String)">
+            <summary>
+            Процедура перевода режима из строкового представления в перечислимое
+            </summary>
+            <param name="pinMode">Режим входа/выхода {DigitalInput, DigitalOutput, AnalogInput, AnalogOutput}</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.SetPinMode(System.Int32,System.String)">
+            <summary>
+            Процедура задания режима входа/выхода
+            </summary>
+            <param name="pinNumber">Номер входа/выхода (1..13)</param>
+            <param name="pinMode">Режим входа/выхода {DigitalInput, DigitalOutput, AnalogInput, AnalogOutput}</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.DigitalRead(System.Int32)">
+            <summary>
+            Возвращает булево значение {false, true} дискретного входа, false в случае чтения с выхода
+            </summary>
+            <param name="pinNumber">Номер входа</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.DigitalWrite(System.Int32,System.Boolean)">
+            <summary>
+            Процедура записи дискретного значения
+            </summary>
+            <param name="pinNumber">Номер выхода</param>
+            <param name="value">значение</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.AnalogRead(System.Int32)">
+            <summary>
+            Возвращает целочисленное значение (0..100) аналогового входа, -1 в случае чтения с выхода
+            </summary>
+            <param name="pinNumber">Номер входа</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.AnalogWrite(System.Int32,System.Int32)">
+            <summary>
+            Процедура записи аналогого значения
+            </summary>
+            <param name="pinNumber">Номер выхода</param>
+            <param name="value">значение</param>
+        </member>
+        <member name="M:ArduinoLibrary.Arduino.Finalize">
+            <summary>
+            Деструктор класа Arduino
+            </summary>
+        </member>
+    </members>
+</doc>
